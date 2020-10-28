@@ -1,27 +1,6 @@
 # SuiteUtilityBro
 One stop shopping for initial environmental configuration. Bro, Do you even Code?
 
-## Experimental
-
-#sudo service ssh status
-
-#sudo service ssh restart
-
-##VNC over SSH
-#ssh -L 5901:localhost:5901 -N -f -l pi LIS23-Eva
-
-##Jupyter over SSH
-#ssh -L 8888:localhost:8888 -N -f -l pi 10.0.0.23
-
-#git config --global user.name "DocLock17"
-
-#git config --global user.email "michael.c.locker@gmail.com"
-
-#ssh-keygen -o -t rsa -b 4096 -C "email@example.com"
-
-#xclip -sel clip < ~/.ssh/id_rsa.pub
-
-#ssh -T git@gitlab.com
 
 #### First we setup our update, reboot, and shutdown entries
 
