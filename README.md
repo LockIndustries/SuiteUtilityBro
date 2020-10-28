@@ -7,8 +7,11 @@ One stop shopping for initial environmental configuration. Bro, Do you even Code
 
 #sudo service ssh restart
 
-#ssh -L 5901:localhost:5901 -N -f -l username hostname_or_IP
+##VNC over SSH
+#ssh -L 5901:localhost:5901 -N -f -l pi LIS23-Eva
 
+##Jupyter over SSH
+#ssh -L 8888:localhost:8888 -N -f -l pi 10.0.0.23
 
 #git config --global user.name "DocLock17"
 
