@@ -1,9 +1,16 @@
 # SuiteUtilityBro
 One stop shopping for initial environmental configuration. Bro, Do you even Code?
 
-git config --global user.name "DocLock17"
+## Experimental
+#git config --global user.name "DocLock17"
 
-git config --global user.email "michael.c.locker@gmail.com"
+#git config --global user.email "michael.c.locker@gmail.com"
+
+#ssh-keygen -o -t rsa -b 4096 -C "email@example.com"
+
+# xclip -sel clip < ~/.ssh/id_rsa.pub
+
+# ssh -T git@gitlab.com
 
 #### First we setup our update, reboot, and shutdown entries
 
