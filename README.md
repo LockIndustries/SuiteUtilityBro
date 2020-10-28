@@ -2,6 +2,7 @@
 One stop shopping for initial environmental configuration. Bro, Do you even Code?
 
 git config --global user.name "DocLock17"
+
 git config --global user.email "michael.c.locker@gmail.com"
 
 #### First we setup our update, reboot, and shutdown entries
