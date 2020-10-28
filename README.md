@@ -2,6 +2,14 @@
 One stop shopping for initial environmental configuration. Bro, Do you even Code?
 
 ## Experimental
+
+#sudo service ssh status
+
+#sudo service ssh restart
+
+#ssh -L 5901:localhost:5901 -N -f -l username hostname_or_IP
+
+
 #git config --global user.name "DocLock17"
 
 #git config --global user.email "michael.c.locker@gmail.com"
