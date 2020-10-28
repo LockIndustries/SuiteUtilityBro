@@ -8,9 +8,9 @@ One stop shopping for initial environmental configuration. Bro, Do you even Code
 
 #ssh-keygen -o -t rsa -b 4096 -C "email@example.com"
 
-# xclip -sel clip < ~/.ssh/id_rsa.pub
+#xclip -sel clip < ~/.ssh/id_rsa.pub
 
-# ssh -T git@gitlab.com
+#ssh -T git@gitlab.com
 
 #### First we setup our update, reboot, and shutdown entries
 
