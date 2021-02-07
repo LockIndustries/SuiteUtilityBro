@@ -1,0 +1,158 @@
+
+
+##### QUick dockeR NotEs ##### 
+
+
+
+
+## The CUDA Test Stack
+sudo docker run --rm --gpus all nvidia/cuda:11.0-base nvidia-smi
+
+
+
+
+#### The Nvidia Stack
+
+# Pulls
+sudo docker pull nvcr.io/nvidia/tensorflow:20.12-tf1-py3 (Tensorflow Version 1)
+sudo docker pull nvcr.io/nvidia/tensorflow:20.12-tf2-py3 (Tensorflow Version 2)
+sudo docker pull nvcr.io/nvidia/pytorch:20.12-py3
+
+
+# TF-GPU 1 Run
+sudo docker run --rm --gpus all -p 8888:8888 --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 nvcr.io/nvidia/tensorflow:20.12-tf1-py3 jupyter-lab
+
+# TF-GPU 2 Run
+sudo docker run --rm --gpus all -p 8888:8888 --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 nvcr.io/nvidia/tensorflow:20.12-tf2-py3 jupyter-lab
+
+# PyTorch Run
+sudo docker run --rm --gpus all -p 8888:8888 --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 nvcr.io/nvidia/pytorch:20.12-py3 jupyter-lab
+
+
+## myRun
+# My Favorite Version this adds mirrored workspace in ~/workspace/workspace without messing up
+sudo docker run --rm -v ~/workspace:/workspace/workspace --gpus all -p 8888:8888 --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 nvcr.io/nvidia/tensorflow:20.12-tf2-py3 jupyter-lab
+
+###  The TensorFlow Stack
+
+# Pulls
+sudo docker pull tensorflow/tensorflow:latest-gpu-jupyter
+
+# Basic
+sudo docker run -it tensorflow/tensorflow bash
+
+# Jupyter
+sudo docker run -it -p 8888:8888 tensorflow/tensorflow:nightly-jupyter
+
+# Recommended
+sudo docker run -it -u $(id -u):$(id -g) -v $PWD:/tmp -w /tmp tensorflow/tensorflow:latest-gpu-jupyter bash
+
+# User Flag in progress
+-u $(id -u):$(id -g)   
+
+
+
+## myRun
+sudo docker run -it --rm -v $PWD:/tmp -w /tmp tensorflow/tensorflow python ./test.py
+
+
+
+
+##### Anaconda Stack
+
+# Pull
+sudo docker pull continuumio/anaconda3
+
+
+# Basic Run
+sudo docker run -i -t continuumio/anaconda3 /bin/bash
+
+### Jupyter Server
+# Install Jupyter and Make working directory
+opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks
+
+# Start Jupyter (root added?!?!?!)
+/opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root
+
+## Jupyter Server Run (one shot is published, but has a root running issue)
+# Anaconda3
+sudo docker run -i -t -p 8888:8888 continuumio/anaconda3 /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser"
+
+# Miniconda3
+sudo docker run -i -t -p 8888:8888 continuumio/miniconda3 /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter notebook --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser"
+
+
+## myRun Anaconda3 (root added?!?!) (Lab Mod)
+sudo docker run -i -t -p 8888:8888 continuumio/anaconda3 /bin/bash -c "/opt/conda/bin/conda install jupyter -y --quiet && mkdir /opt/notebooks && /opt/conda/bin/jupyter-lab --notebook-dir=/opt/notebooks --ip='*' --port=8888 --no-browser --allow-root"
+
+
+
+
+################### Bash History Setup ###################
+
+#### Docker Installation
+# Pres
+sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
+# Download and Add the Repository
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+sudo add-apt-repository    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+sudo apt-get update
+
+# Install
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+# Check Version
+docker version
+
+# Test Hello World
+sudo docker run hello-world
+
+# Test Ubuntu
+sudo docker run -it ubuntu bash
+
+
+
+
+################### Nvidia NGC Installation (Stack on Docker) ###################
+
+# Download and Add the Repository
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)    && 
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -    && 
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list &&
+curl https://get.docker.com | sh \  &&
+sudo apt-get update
+
+# Install Nvidia Container Kit
+sudo apt-get install -y nvidia-container-toolkit &&
+
+# Install Nvidia Docker Tools 
+sudo apt-get install -y nvidia-docker2 &&
+
+# Resart Docker
+############          I hade to redo this once not sure why
+sudo systemctl restart docker
+
+
+
+
+################### Git Clone, Add, Commit, Push for DOCKER ###################
+
+# cd into notebooks and clone repo
+cd opt/notebooks &&
+git clone https://github.com/LockIndustries/SuiteUtilityBro &&
+cd SuiteUtilityBro
+
+# Set User name and email.
+git config user.name "DocLock17" &&
+git config user.email "michael.c.locker@gmail.com" &&
+# Add Commit and Push
+git add --all &&
+git commit -m "Commit from container won't accept --allow-empty-message" &&
+git push
+
+
